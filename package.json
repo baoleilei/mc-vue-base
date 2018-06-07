@@ -5,13 +5,13 @@
   "author": "李春伟 <lichunwei@hefantv.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "server": "node bin/command/server.js",
+    "testing": "node bin/command/test.js",
+    "build": "node bin/command/build.js",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs"
   },
   "dependencies": {
     "happypack": "^5.0.0",

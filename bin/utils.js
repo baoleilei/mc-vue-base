@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const chalk = require('chalk')
 const config = require('../config')
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -97,4 +98,28 @@ exports.createNotifierCallback = () => {
       icon: path.join(__dirname, 'logo.png')
     })
   }
+}
+
+function loggerCreator(type) {
+  return function(info) {
+    if (type === 'error') {
+      console.error(chalk.red(info))
+      process.exit(1)
+    }
+
+    console.log(chalk.white(info))
+  }
+}
+
+exports.util = {
+  Log: {
+    log: loggerCreator('log'),
+    fatal: loggerCreator('error'),
+    red: info => console.log(chalk.red(info)),
+    blue: info => console.log(chalk.blue(info)),
+    green: info => console.log(chalk.green(info))
+  },
+  cwd: file => path.resolve(file || ''),
+  cDir: file => path.join(__dirname, file || ''),
+  ownDir: file => path.join(__dirname, '../', file || '')
 }
